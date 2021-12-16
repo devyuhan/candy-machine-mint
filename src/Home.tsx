@@ -38,10 +38,12 @@ export interface HomeProps {
 
 const Home = (props: HomeProps) => {
   const [balance, setBalance] = useState<number>();
+  
   const [isActive, setIsActive] = useState(false); // true when countdown completes
   const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
 
+  const [pricePerNFT, setPricePerNFT] = useState(0);
   const [itemsAvailable, setItemsAvailable] = useState(0);
   const [itemsRedeemed, setItemsRedeemed] = useState(0);
   const [itemsRemaining, setItemsRemaining] = useState(0);
@@ -64,6 +66,7 @@ const Home = (props: HomeProps) => {
       const {
         candyMachine,
         goLiveDate,
+        pricePerNFT,
         itemsAvailable,
         itemsRemaining,
         itemsRedeemed,
@@ -76,6 +79,7 @@ const Home = (props: HomeProps) => {
       setItemsAvailable(itemsAvailable);
       setItemsRemaining(itemsRemaining);
       setItemsRedeemed(itemsRedeemed);
+      setPricePerNFT(pricePerNFT);
 
       setIsSoldOut(itemsRemaining === 0);
       setStartDate(goLiveDate);
@@ -172,6 +176,8 @@ const Home = (props: HomeProps) => {
       )}
 
       {wallet && <p>Balance: {(balance || 0).toLocaleString()} SOL</p>}
+
+      {wallet && <p>Pirce Per Mint: {pricePerNFT} SOL</p>}
 
       {wallet && <p>Total Available: {itemsAvailable}</p>}
 

@@ -29,7 +29,8 @@ interface CandyMachineState {
   itemsAvailable: number;
   itemsRedeemed: number;
   itemsRemaining: number;
-  goLiveDate: Date,
+  goLiveDate: Date;
+  pricePerNFT: number;
 }
 
 export const awaitTransactionSignatureConfirmation = async (
@@ -181,11 +182,14 @@ export const getCandyMachineState = async (
   let goLiveDate = state.data.goLiveDate.toNumber();
   goLiveDate = new Date(goLiveDate * 1000);
 
+  const pricePerNFT=(state.data.price.toNumber())/1000000000;
+
   console.log({
     itemsAvailable,
     itemsRedeemed,
     itemsRemaining,
     goLiveDate,
+    pricePerNFT
   })
 
   return {
@@ -194,6 +198,7 @@ export const getCandyMachineState = async (
     itemsRedeemed,
     itemsRemaining,
     goLiveDate,
+    pricePerNFT
   };
 }
 
